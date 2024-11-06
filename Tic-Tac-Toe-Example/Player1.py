@@ -3,6 +3,8 @@
 # author: Stephen Adams
 # date  : 2024-10-19
 #
+# Temporary modification by Sophie Delahunt! Just this comment.
+#
 # This file contains the code for Player 1 in a Tic-Tac-Toe game. It is intentionally not simplified or generalized to
 # attempt to avoid merge conflicts between the partners.
 import random
