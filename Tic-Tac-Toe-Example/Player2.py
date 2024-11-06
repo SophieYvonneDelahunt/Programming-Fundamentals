@@ -13,6 +13,14 @@ def getValue( board, position ):
     """
     return board[ (position - 1) // 3 ][ (position - 1) % 3 ]
 
+def winfinder (a,b,c):
+    if (getValue (board, [a]) == "O" and getValue (board, [b]) == "O" and getValue (board, [c]) == " "):
+        return c
+    elif (getValue (board, [a]) == "O" and getValue (board, [b]) == " " and getValue (board, [c]) == "O"):
+        return b
+    else (getValue (board, [a]) == " " and getValue (board, [b]) == "O" and getValue (board, [c]) == "O":
+        return a
+
 def getMove(board):
     """
     Determines the next move for Player 2. Player 2 will always be 'O'.
@@ -33,7 +41,7 @@ def getMove(board):
     Returns:
     integer: The index of the next move between 1 and 9.
     """
-    #this is an epic test 
+
     # Example of checking for a win in the top row.
     if ( getValue( board, 1 ) == "O" and getValue( board, 2 ) == "O" and getValue( board, 3 ) == " " ):
         return 3
