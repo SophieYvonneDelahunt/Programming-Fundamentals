@@ -15,6 +15,28 @@ def getValue( board, position ):
     """
     return board[ (position - 1) // 3 ][ (position - 1) % 3 ]
 
+def horizontal_verifier (A,board):
+    row_checker = False
+    space_checker = 0
+
+    for i in range(A,A + 3):
+        if getValue( board, i ) == "O":
+            row_checker = True
+        if getValue( board, i ) == " ":
+            space_checker = i
+    return row_checker, space_checker
+
+def vertical_verifier (A,board):
+    column_checker = False
+    space_checker = 0
+
+    for i in range(A,A + 6,3):
+        if getValue( board, i ) == "O":
+            column_checker = True
+        if getValue( board, i ) == " ":
+            space_checker = i
+    return column_checker, space_checker
+
 def getMove(board):
     """
     Determines the next move for Player 1. Player 1 will always be 'X'.
@@ -35,9 +57,27 @@ def getMove(board):
     Returns:
     integer: The index of the next move between 1 and 9.
     """
-    
-    # Example of checking for a win in the top row.
-    if ( getValue( board, 1 ) == "X" and getValue( board, 2 ) == "X" and getValue( board, 3 ) == " " ):
-        return 3
+    for i in range (1,8,3):
+        row_checker, space_checker = horizontal_verifier (i, board)
 
-    return random.randint(1, 9) # This is a placeholder. Replace this line with your code.
+        if row_checker == False:
+            return space_checker
+    
+    for i in range (1,4,1):
+        column_checker, space_checker = vertical_verifier (i, board)
+
+        if column_checker == False:
+            return space_checker
+    
+    # The following checks for diagonal lines.
+    
+    if ( getValue( board, 1 ) == " " and getValue( board, 5 ) == "X" and getValue( board, 9 ) == "X" ):
+        return 1
+    if ( getValue( board, 3 ) == " " and getValue( board, 5 ) == "X" and getValue( board, 7 ) == "X" ):
+        return 3
+    if ( getValue( board, 9 ) == " " and getValue( board, 5 ) == "X" and getValue( board, 1 ) == "X" ):
+        return 9
+    if ( getValue( board, 7 ) == " " and getValue( board, 5 ) == "X" and getValue( board, 3 ) == "X" ):
+        return 7
+    else:
+        return random.randint(1, 9)
